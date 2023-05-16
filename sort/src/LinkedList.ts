@@ -37,7 +37,20 @@ export class LinkedList implements Sortable {
     }
     
     swap(leftIndex: number, rightIndex: number): void {
-        throw new Error("Method not implemented.");
+        const leftHandNode = this.at(leftIndex);
+        const rightHandNode = this.at(rightIndex);
+
+        if (leftIndex == 0) {
+            rightHandNode.next = leftHandNode;
+            leftHandNode.next = null;
+
+            return;
+        }
+
+        const prevNode = this.at(leftIndex-1);
+        leftHandNode.next = rightHandNode.next;
+        rightHandNode.next = leftHandNode;
+        prevNode.next = rightHandNode;
     }
 
     add(value: number): void {
