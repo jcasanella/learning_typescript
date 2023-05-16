@@ -26,8 +26,16 @@ export class LinkedList implements Sortable {
     }
     
     compare(leftIndex: number, rightIndex: number): boolean {
-        throw new Error("Method not implemented.");
+        if (!this.head) {
+            throw new Error('Empty list');
+        }
+
+        const nodeLeft = this.at(leftIndex);
+        const nodeRight = this.at(rightIndex);
+
+        return nodeLeft.value > nodeRight.value;
     }
+    
     swap(leftIndex: number, rightIndex: number): void {
         throw new Error("Method not implemented.");
     }
@@ -47,7 +55,24 @@ export class LinkedList implements Sortable {
         tail.next = node;
     }
 
-    at(index: number): Node {}
+    at(index: number): Node {
+        if (!this.head) {
+            throw new Error('Index out of bounds')
+        }
+
+        let counter = 0;
+        let node: Node | null = this.head;
+        while (node) {
+            if (counter === index) {
+                return node;
+            }
+
+            counter++;
+            node = node.next;
+        }
+
+        throw new Error('Index out of bounds');
+    }
 
     print() {}
 }
