@@ -87,5 +87,15 @@ export class LinkedList implements Sortable {
         throw new Error('Index out of bounds');
     }
 
-    print() {}
+    print(): void {
+        if (!this.head) {
+            return;
+        }
+
+        let node: Node | null = this.head;
+        while (node) {
+            console.log(node.value);
+            node = node.next;
+        }
+    }
 }
