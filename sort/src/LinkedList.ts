@@ -1,11 +1,9 @@
 import { Sortable } from "./Sorter";
 
 class Node {
-    next: Node | null;
+    next: Node | null = null;
 
-    constructor(public readonly value: number) {
-        this.next = null;
-    }
+    constructor(public value: number) {}
 }
 
 export class LinkedList implements Sortable {
@@ -37,20 +35,12 @@ export class LinkedList implements Sortable {
     }
     
     swap(leftIndex: number, rightIndex: number): void {
-        const leftHandNode = this.at(leftIndex);
-        const rightHandNode = this.at(rightIndex);
+        const prevNode = this.at(leftIndex);
+        const nextNode = this.at(rightIndex);
 
-        if (leftIndex == 0) {
-            rightHandNode.next = leftHandNode;
-            leftHandNode.next = null;
-
-            return;
-        }
-
-        const prevNode = this.at(leftIndex-1);
-        leftHandNode.next = rightHandNode.next;
-        rightHandNode.next = leftHandNode;
-        prevNode.next = rightHandNode;
+        const temp: number = prevNode.value;
+        prevNode.value = nextNode.value;
+        nextNode.value = temp;
     }
 
     add(value: number): void {
