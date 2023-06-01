@@ -1,6 +1,7 @@
 lib-cov
 *.seed
 *.log
+*.csv
 *.dat
 *.out
 *.pid
@@ -33,4 +34,5 @@ dist/**/*
 # ignore yarn.lock
 yarn.lock
 
-.vscode
+pnpm-lock.yaml
+package-lock.json
