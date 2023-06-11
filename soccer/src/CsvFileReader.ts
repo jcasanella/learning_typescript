@@ -3,8 +3,8 @@ import { MatchKeys } from './MatchResult';
 
 export type MatchData = [Date, string, string, number, number, MatchKeys, string];
 
-export abstract class CsvFileReader {
-    data: MatchData[] = [];
+export abstract class CsvFileReader<T> {
+    data: T[] = [];
 
     constructor(private readonly filename: string) {}
 
@@ -19,5 +19,5 @@ export abstract class CsvFileReader {
         .map(this.mapRow);
     }
 
-    abstract mapRow(row: string[]): MatchData; 
+    abstract mapRow(row: string[]): T; 
 }

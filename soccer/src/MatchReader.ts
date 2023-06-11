@@ -2,7 +2,7 @@ import { CsvFileReader, MatchData } from "./CsvFileReader";
 import { MatchKeys } from "./MatchResult";
 import { dateStringToDate } from "./utils";
 
-export class MatchReader extends CsvFileReader {
+export class MatchReader extends CsvFileReader<MatchData> {
     mapRow(row: string[]): MatchData {
         return [
             dateStringToDate(row[0]),
