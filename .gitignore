@@ -38,3 +38,6 @@ soccer/dist/index.js
 web/pnpm-lock.yaml
 soccer/report.html
 maps/api_token.txt
+
+**/.cache
+**/dist/*

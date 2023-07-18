@@ -9,29 +9,29 @@ export class User {
     get(propName: string): string|number {
         const keys = Object.keys(this.data);
         if (keys.filter((_) => _ === propName).length != 1) {
-            throw new Exception("Not valid key");
+            throw new Error(`Not valid key: ${propName}`);
         }
 
         return this.data[propName];
     }
 
-    set(data: UserProps) {
+    // set(data: UserProps) {
 
-    }
+    // }
 
-    on(eventName: string, callback() => {}) {
+    // on(eventName: string, callback() => {}) {
 
-    }
+    // }
 
-    trigger(eventName: string) {
+    // trigger(eventName: string) {
 
-    }
+    // }
 
-    fetch(): Promise<void> {
+    // fetch(): Promise<void> {
 
-    }
+    // }
 
-    save(): Promise<void> {
+    // save(): Promise<void> {
 
-    }
+    // }
 }
