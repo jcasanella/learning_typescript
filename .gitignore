@@ -34,7 +34,6 @@ dist/**/*
 yarn.lock
 
 .vscode
-soccer/dist/index.js
 web/pnpm-lock.yaml
 soccer/report.html
 maps/api_token.txt
