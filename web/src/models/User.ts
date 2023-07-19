@@ -3,29 +3,32 @@ export interface UserProps {
     age?: number;
 }
 
+type Callback = () => void;
+
 export class User {
     constructor(private readonly data: UserProps) {}
 
-    get(propName: string): string|number {
+    get(propName: string): string|number|undefined {
         const keys = Object.keys(this.data);
-        if (keys.filter((_) => _ === propName).length != 1) {
+        if (keys.filter((_) => _ === propName).length !== 1) {
             throw new Error(`Not valid key: ${propName}`);
         }
 
-        return this.data[propName];
+        const keyProp = propName as keyof UserProps;
+        return this.data[keyProp];
     }
 
-    // set(data: UserProps) {
+    set(data: UserProps) {
+        Object.assign(this.data, data);
+    }
 
-    // }
+    on(eventName: string, callback: Callback) {
 
-    // on(eventName: string, callback() => {}) {
+    }
 
-    // }
+    trigger(eventName: string) {
 
-    // trigger(eventName: string) {
-
-    // }
+    }
 
     // fetch(): Promise<void> {
 
