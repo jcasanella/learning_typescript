@@ -6,6 +6,8 @@ export interface UserProps {
 type Callback = () => void;
 
 export class User {
+    private events: { [key: string]: Callback[] } = {};
+
     constructor(private readonly data: UserProps) {}
 
     get(propName: string): string|number|undefined {
@@ -23,12 +25,14 @@ export class User {
     }
 
     on(eventName: string, callback: Callback) {
-
+        const handlers = this.events[eventName] || [];
+        handlers.push(callback);
+        this.events[eventName] = handlers;
     }
 
-    trigger(eventName: string) {
+    // trigger(eventName: string) {
 
-    }
+    // }
 
     // fetch(): Promise<void> {
 
