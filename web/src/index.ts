@@ -12,4 +12,9 @@ user.on('change', () => { console.log('Test2') });
 
 user.on('hover', () => { console.log('Test') });
 
+user.trigger('change');
+user.trigger('hover');
+
+user.trigger('invalid');
+
 console.log(user);

@@ -20,6 +20,10 @@
     },
     "scripts": {
         "lint": "eslint . --ext .ts",
-        "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+        "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+        "start:parcel": "pnpm parcel index.html"
+    },
+    "dependencies": {
+        "json-server": "^0.17.3"
     }
 }

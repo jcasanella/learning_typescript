@@ -30,9 +30,15 @@ export class User {
         this.events[eventName] = handlers;
     }
 
-    // trigger(eventName: string) {
+    trigger(eventName: string) {
+        const callbacks = this.events[eventName];
+        if (!callbacks || callbacks.length === 0) {
+            throw new Error(`Not existing eventName: ${eventName}`);
+        }
 
-    // }
+        callbacks.forEach(callback => { callback() });
+
+    }
 
     // fetch(): Promise<void> {
 
