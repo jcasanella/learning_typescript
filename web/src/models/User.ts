@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { Eventing } from './Eventing';
 
 export interface UserProps {
     id?: number;
@@ -6,10 +7,8 @@ export interface UserProps {
     age?: number;
 }
 
-type Callback = () => void;
-
 export class User {
-    private events: { [key: string]: Callback[] } = {};
+    private events: Eventing = new Eventing();
 
     constructor(private readonly data: UserProps) {}
 
@@ -25,22 +24,6 @@ export class User {
 
     set(data: UserProps) {
         Object.assign(this.data, data);
-    }
-
-    on(eventName: string, callback: Callback) {
-        const handlers = this.events[eventName] || [];
-        handlers.push(callback);
-        this.events[eventName] = handlers;
-    }
-
-    trigger(eventName: string) {
-        const callbacks = this.events[eventName];
-        if (!callbacks || callbacks.length === 0) {
-            throw new Error(`Not existing eventName: ${eventName}`);
-        }
-
-        callbacks.forEach(callback => { callback() });
-
     }
 
     fetch(): void {
