@@ -1,3 +1,4 @@
+import { Attributes } from './Attributes';
 import { Eventing } from './Eventing';
 import { Sync } from './Sync';
 
@@ -8,24 +9,23 @@ export interface UserProps {
 }
 
 export class User {
-    private events = new Eventing();
-    private sync = new Sync<UserProps>('http://localhost:3000');
+    private _events = new Eventing();
+    private _sync = new Sync<UserProps>('http://localhost:3000');
+    private _attributes: Attributes<UserProps>;
 
-    constructor(private readonly data: UserProps) {}
-
-    get(propName: string): string|number|undefined {
-        const keys = Object.keys(this.data);
-        if (keys.filter((_) => _ === propName).length !== 1) {
-            throw new Error(`Not valid key: ${propName}`);
-        }
-
-        const keyProp = propName as keyof UserProps;
-        return this.data[keyProp];
+    constructor(data: UserProps) {
+        this._attributes = new Attributes<UserProps>(data);
     }
 
-    set(data: UserProps) {
-        Object.assign(this.data, data);
+    public get events() {
+        return this._events;
+    } 
+
+    public get sync() {
+        return this._sync;
     }
 
-    sync() {}
+    public get attributes() {
+        return this._attributes;
+    }
 }
