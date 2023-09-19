@@ -5,8 +5,6 @@ const user = new User({ name: 'Peter', age: 20 });
 user.events.on('change', () => {
     console.log('change!');
 });
-
-user.events.trigger('change');
-
+user.set({ name: 'TestName '});
 console.log(user.get('name'));
 
