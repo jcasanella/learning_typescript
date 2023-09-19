@@ -1,5 +1,5 @@
 import { Attributes } from './Attributes';
-import { Eventing } from './Eventing';
+import { Callback, Eventing } from './Eventing';
 import { Sync } from './Sync';
 
 export interface UserProps {
@@ -17,15 +17,27 @@ export class User {
         this._attributes = new Attributes<UserProps>(data);
     }
 
-    public get events() {
+    get events() {
         return this._events;
     } 
 
-    public get sync() {
+    get sync() {
         return this._sync;
     }
 
-    public get attributes() {
+    get attributes() {
         return this._attributes;
+    }
+
+    get on() {
+        return this._events.on;
+    }
+
+    get trigger() {
+        return this._events.trigger;
+    }
+
+    get get() {
+        return this._attributes.get;
     }
 }
