@@ -35,6 +35,7 @@ yarn.lock
 
 .vscode
 web/pnpm-lock.yaml
+web/.parcel-cache/**
 soccer/report.html
 maps/api_token.txt
 
