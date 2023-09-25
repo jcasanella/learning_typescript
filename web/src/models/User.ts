@@ -1,3 +1,6 @@
+import { ApiSync } from "./ApiSync";
+import { Attributes } from "./Attributes";
+import { Eventing } from "./Eventing";
 import { Model } from "./Model";
 
 interface UserProps {
@@ -9,5 +12,11 @@ interface UserProps {
 const rootUrl = 'http://localhost:3000';
 
 export class User extends Model<UserProps> {
-
+    static build(attrs: UserProps): User {
+        return new User(
+            new Attributes<UserProps>(attrs),
+            new Eventing(),
+            new ApiSync<UserProps>(rootUrl)
+        );
+    }
 }
