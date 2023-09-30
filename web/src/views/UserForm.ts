@@ -5,10 +5,27 @@ export class UserForm {
         console.log('Hi button!!!');
     }
 
+    onHeaderHover(): void {
+        console.log('Hi from Header!!!');
+    }
+
     eventsMap(): { [key: string]: () => void } {
         return {
-            'click:button': this.onButtonClick
+            'click:button': this.onButtonClick,
+            'mouseenter:h1': this.onHeaderHover
         };
+    }
+
+    bindEvents(fragment: DocumentFragment): void {
+        const eventsMap = this.eventsMap();
+
+        for (const eventKey in eventsMap) {
+            const [event, selector] = eventKey.split(":");
+
+            fragment.querySelectorAll(selector).forEach((_) => {
+                _.addEventListener(event, eventsMap[eventKey])
+            });
+        }
     }
 
     template(): string {
@@ -24,6 +41,8 @@ export class UserForm {
     render(): void {
         const templateElement = document.createElement('template');
         templateElement.innerHTML = this.template();
+
+        this.bindEvents(templateElement.content);
 
         this.parent.append(templateElement.content);
     }
