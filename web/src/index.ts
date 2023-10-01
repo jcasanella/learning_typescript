@@ -1,15 +1,16 @@
 import { User } from "./models/User";
 import { UserForm } from "./views/UserForm";
 
-const element = document.getElementById('#root');
+const user = User.build({ name: 'Jordi', age: 42 });
+const element = document.getElementById('root');
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const userForm = new UserForm(element!);
+const userForm = new UserForm(element!, user);
 userForm.render();
 
-const collection = User.buildCollection();
+// const collection = User.buildCollection();
 
-collection.on('change', () => {
-    console.log(collection);
-});
+// collection.on('change', () => {
+//     console.log(collection);
+// });
 
-collection.fetch();
+// collection.fetch();
