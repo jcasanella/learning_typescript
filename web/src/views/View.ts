@@ -1,7 +1,7 @@
-import { User } from "../models/User";
+import { Model } from "../models/Model";
 
-export abstract class View {
-    constructor(protected readonly parent: Element, protected readonly model: User) {
+export abstract class View<T extends Model<K>, K extends { id?: number }> {
+    constructor(protected readonly parent: Element, protected readonly model: T) {
         this.model.on('change', () => {
             this.render();
         });
