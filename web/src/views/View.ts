@@ -19,9 +19,11 @@ export abstract class View<T extends Model<K>, K extends { id?: number }> {
         }
     }
 
-    abstract eventsMap(): { [key: string]: () => void };
-
     abstract template(): string;
+
+    eventsMap(): { [key: string]: () => void } {
+        return {};
+    }
 
     render(): void {
         this.parent.innerHTML = '';
