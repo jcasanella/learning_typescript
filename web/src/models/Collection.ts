@@ -2,13 +2,17 @@ import axios, { AxiosResponse } from "axios";
 import { Eventing } from "./Eventing";
 
 export class Collection<T, V> {
-    private models: T[] = [];
+    private _models: T[] = [];
     private events = new Eventing();
 
     constructor(
         private readonly url: string, 
         private readonly deserialize: (json: V) => T
     ) {}
+
+    get models() {
+        return this._models;
+    }
 
     get on() {
         return this.events.on;
@@ -22,7 +26,7 @@ export class Collection<T, V> {
         axios.get(this.url)
             .then((resp: AxiosResponse) => {
                 resp.data.array.forEach((value: V) => {
-                    this.models.push(this.deserialize(value));
+                    this._models.push(this.deserialize(value));
                 });
             })
 
