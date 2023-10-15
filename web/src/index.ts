@@ -1,6 +1,7 @@
-import { User } from "./models/User";
+import { Collection } from "./models/Collection";
+import { User, UserProps } from "./models/User";
 import { UserEdit } from "./views/UserEdit";
-import { UserForm } from "./views/UserForm";
+import { UserList } from "./views/UserList";
 
 const user = User.build({ name: 'Jordi', age: 42 });
 const element = document.getElementById('root');
@@ -9,10 +10,13 @@ const userEdit = new UserEdit(element!, user);
 userEdit.render();
 console.log(userEdit);
 
-// const collection = User.buildCollection();
+const users = new Collection('http://localhost:3000/users', (json: UserProps) => { return User.build(json); });
 
-// collection.on('change', () => {
-//     console.log(collection);
-// });
+users.on('change', () => {
+    const root = document.getElementById('root');
+    if (root) {
+        new UserList(root, users).render();
+    }
+});
 
-// collection.fetch();
+users.fetch();
